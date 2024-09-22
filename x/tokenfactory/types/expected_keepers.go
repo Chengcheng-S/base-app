@@ -19,7 +19,7 @@ type AccountKeeper interface {
 type BankKeeper interface {
 	SendCoins(ctx sdk.Context, fromAddr sdk.AccAddress, toAddr sdk.AccAddress, amt sdk.Coins) error
 	MintCoins(ctx sdk.Context, moduleName string, amt sdk.Coins) error
-	SpendableCoins(ctx sdk.Context, addr sdk.AccAddress) sdk.Coins
+	SpendableCoins(ctx context.Context, addr sdk.AccAddress) sdk.Coins
 }
 
 // ParamSubspace defines the expected Subspace interface for parameters.
