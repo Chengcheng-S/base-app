@@ -40,18 +40,18 @@ func (k Keeper) GetDenom(
 	return val, true
 }
 
-// RemoveDenom removes a denom from the store
-func (k Keeper) RemoveDenom(
-	ctx context.Context,
-	denom string,
+// // RemoveDenom removes a denom from the store
+// func (k Keeper) RemoveDenom(
+// 	ctx context.Context,
+// 	denom string,
 
-) {
-	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
-	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.DenomKeyPrefix))
-	store.Delete(types.DenomKey(
-		denom,
-	))
-}
+// ) {
+// 	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+// 	store := prefix.NewStore(storeAdapter, types.KeyPrefix(types.DenomKeyPrefix))
+// 	store.Delete(types.DenomKey(
+// 		denom,
+// 	))
+// }
 
 // GetAllDenom returns all denom
 func (k Keeper) GetAllDenom(ctx context.Context) (list []types.Denom) {

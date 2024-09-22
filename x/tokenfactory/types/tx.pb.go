@@ -133,8 +133,8 @@ type MsgCreateDenom struct {
 	Precision          int32  `protobuf:"varint,5,opt,name=precision,proto3" json:"precision,omitempty"`
 	Url                string `protobuf:"bytes,6,opt,name=url,proto3" json:"url,omitempty"`
 	MaxSupply          int32  `protobuf:"varint,7,opt,name=maxSupply,proto3" json:"maxSupply,omitempty"`
-	Supply             int32  `protobuf:"varint,8,opt,name=supply,proto3" json:"supply,omitempty"`
-	CanChangeMaxSupply bool   `protobuf:"varint,9,opt,name=canChangeMaxSupply,proto3" json:"canChangeMaxSupply,omitempty"`
+	// Supply             int32  `protobuf:"varint,8,opt,name=supply,proto3" json:"supply,omitempty"`
+	CanChangeMaxSupply bool   `protobuf:"varint,8,opt,name=canChangeMaxSupply,proto3" json:"canChangeMaxSupply,omitempty"`
 }
 
 func (m *MsgCreateDenom) Reset()         { *m = MsgCreateDenom{} }
@@ -219,12 +219,12 @@ func (m *MsgCreateDenom) GetMaxSupply() int32 {
 	return 0
 }
 
-func (m *MsgCreateDenom) GetSupply() int32 {
-	if m != nil {
-		return m.Supply
-	}
-	return 0
-}
+// func (m *MsgCreateDenom) GetSupply() int32 {
+// 	if m != nil {
+// 		return m.Supply
+// 	}
+// 	return 0
+// }
 
 func (m *MsgCreateDenom) GetCanChangeMaxSupply() bool {
 	if m != nil {
@@ -571,7 +571,7 @@ type MsgClient interface {
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	CreateDenom(ctx context.Context, in *MsgCreateDenom, opts ...grpc.CallOption) (*MsgCreateDenomResponse, error)
 	UpdateDenom(ctx context.Context, in *MsgUpdateDenom, opts ...grpc.CallOption) (*MsgUpdateDenomResponse, error)
-	DeleteDenom(ctx context.Context, in *MsgDeleteDenom, opts ...grpc.CallOption) (*MsgDeleteDenomResponse, error)
+	// DeleteDenom(ctx context.Context, in *MsgDeleteDenom, opts ...grpc.CallOption) (*MsgDeleteDenomResponse, error)
 }
 
 type msgClient struct {
@@ -609,14 +609,14 @@ func (c *msgClient) UpdateDenom(ctx context.Context, in *MsgUpdateDenom, opts ..
 	return out, nil
 }
 
-func (c *msgClient) DeleteDenom(ctx context.Context, in *MsgDeleteDenom, opts ...grpc.CallOption) (*MsgDeleteDenomResponse, error) {
-	out := new(MsgDeleteDenomResponse)
-	err := c.cc.Invoke(ctx, "/loan.tokenfactory.Msg/DeleteDenom", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
+// func (c *msgClient) DeleteDenom(ctx context.Context, in *MsgDeleteDenom, opts ...grpc.CallOption) (*MsgDeleteDenomResponse, error) {
+// 	out := new(MsgDeleteDenomResponse)
+// 	err := c.cc.Invoke(ctx, "/loan.tokenfactory.Msg/DeleteDenom", in, out, opts...)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+// 	return out, nil
+// }
 
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
@@ -625,7 +625,7 @@ type MsgServer interface {
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	CreateDenom(context.Context, *MsgCreateDenom) (*MsgCreateDenomResponse, error)
 	UpdateDenom(context.Context, *MsgUpdateDenom) (*MsgUpdateDenomResponse, error)
-	DeleteDenom(context.Context, *MsgDeleteDenom) (*MsgDeleteDenomResponse, error)
+	// DeleteDenom(context.Context, *MsgDeleteDenom) (*MsgDeleteDenomResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -641,9 +641,10 @@ func (*UnimplementedMsgServer) CreateDenom(ctx context.Context, req *MsgCreateDe
 func (*UnimplementedMsgServer) UpdateDenom(ctx context.Context, req *MsgUpdateDenom) (*MsgUpdateDenomResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDenom not implemented")
 }
-func (*UnimplementedMsgServer) DeleteDenom(ctx context.Context, req *MsgDeleteDenom) (*MsgDeleteDenomResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteDenom not implemented")
-}
+
+// func (*UnimplementedMsgServer) DeleteDenom(ctx context.Context, req *MsgDeleteDenom) (*MsgDeleteDenomResponse, error) {
+// 	return nil, status.Errorf(codes.Unimplemented, "method DeleteDenom not implemented")
+// }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
 	s.RegisterService(&_Msg_serviceDesc, srv)
@@ -703,23 +704,23 @@ func _Msg_UpdateDenom_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_DeleteDenom_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgDeleteDenom)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).DeleteDenom(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/loan.tokenfactory.Msg/DeleteDenom",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).DeleteDenom(ctx, req.(*MsgDeleteDenom))
-	}
-	return interceptor(ctx, in, info, handler)
-}
+// func _Msg_DeleteDenom_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+// 	in := new(MsgDeleteDenom)
+// 	if err := dec(in); err != nil {
+// 		return nil, err
+// 	}
+// 	if interceptor == nil {
+// 		return srv.(MsgServer).DeleteDenom(ctx, in)
+// 	}
+// 	info := &grpc.UnaryServerInfo{
+// 		Server:     srv,
+// 		FullMethod: "/loan.tokenfactory.Msg/DeleteDenom",
+// 	}
+// 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+// 		return srv.(MsgServer).DeleteDenom(ctx, req.(*MsgDeleteDenom))
+// 	}
+// 	return interceptor(ctx, in, info, handler)
+// }
 
 var Msg_serviceDesc = _Msg_serviceDesc
 var _Msg_serviceDesc = grpc.ServiceDesc{
@@ -738,10 +739,10 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 			MethodName: "UpdateDenom",
 			Handler:    _Msg_UpdateDenom_Handler,
 		},
-		{
-			MethodName: "DeleteDenom",
-			Handler:    _Msg_DeleteDenom_Handler,
-		},
+		// {
+		// MethodName: "DeleteDenom",
+		// Handler:    _Msg_DeleteDenom_Handler,
+		// },
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "loan/tokenfactory/tx.proto",
@@ -840,11 +841,11 @@ func (m *MsgCreateDenom) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x48
 	}
-	if m.Supply != 0 {
-		i = encodeVarintTx(dAtA, i, uint64(m.Supply))
-		i--
-		dAtA[i] = 0x40
-	}
+	// if m.Supply != 0 {
+	// 	i = encodeVarintTx(dAtA, i, uint64(m.Supply))
+	// 	i--
+	// 	dAtA[i] = 0x40
+	// }
 	if m.MaxSupply != 0 {
 		i = encodeVarintTx(dAtA, i, uint64(m.MaxSupply))
 		i--
@@ -1149,9 +1150,9 @@ func (m *MsgCreateDenom) Size() (n int) {
 	if m.MaxSupply != 0 {
 		n += 1 + sovTx(uint64(m.MaxSupply))
 	}
-	if m.Supply != 0 {
-		n += 1 + sovTx(uint64(m.Supply))
-	}
+	// if m.Supply != 0 {
+	// 	n += 1 + sovTx(uint64(m.Supply))
+	// }
 	if m.CanChangeMaxSupply {
 		n += 2
 	}
@@ -1641,26 +1642,26 @@ func (m *MsgCreateDenom) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
+		// case 8:
+		// 	if wireType != 0 {
+		// 		return fmt.Errorf("proto: wrong wireType = %d for field Supply", wireType)
+		// 	}
+		// 	m.Supply = 0
+		// 	for shift := uint(0); ; shift += 7 {
+		// 		if shift >= 64 {
+		// 			return ErrIntOverflowTx
+		// 		}
+		// 		if iNdEx >= l {
+		// 			return io.ErrUnexpectedEOF
+		// 		}
+		// 		b := dAtA[iNdEx]
+		// 		iNdEx++
+		// 		m.Supply |= int32(b&0x7F) << shift
+		// 		if b < 0x80 {
+		// 			break
+		// 		}
+		// 	}
 		case 8:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Supply", wireType)
-			}
-			m.Supply = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Supply |= int32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 9:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field CanChangeMaxSupply", wireType)
 			}

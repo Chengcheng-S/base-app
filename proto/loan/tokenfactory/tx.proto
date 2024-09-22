@@ -20,7 +20,7 @@ service Msg {
   rpc UpdateParams (MsgUpdateParams) returns (MsgUpdateParamsResponse);
   rpc CreateDenom  (MsgCreateDenom ) returns (MsgCreateDenomResponse );
   rpc UpdateDenom  (MsgUpdateDenom ) returns (MsgUpdateDenomResponse );
-  rpc DeleteDenom  (MsgDeleteDenom ) returns (MsgDeleteDenomResponse );
+  // rpc DeleteDenom  (MsgDeleteDenom ) returns (MsgDeleteDenomResponse );
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -49,32 +49,41 @@ message MsgCreateDenom {
   int32  precision          = 5;
   string url                = 6;
   int32  maxSupply          = 7;
-  int32  supply             = 8;
-  bool   canChangeMaxSupply = 9;
+  // int32  supply             = 8;
+  bool   canChangeMaxSupply = 8;
 }
 
 message MsgCreateDenomResponse {}
 
+// message MsgUpdateDenom {
+//   option (cosmos.msg.v1.signer) = "owner";
+//   string owner              = 1;
+//   string denom              = 2;
+//   string description        = 3;
+//   string ticker             = 4;
+//   int32  precision          = 5;
+//   string url                = 6;
+//   int32  maxSupply          = 7;
+//   int32  supply             = 8;
+//   bool   canChangeMaxSupply = 9;
+// }
+
 message MsgUpdateDenom {
-  option (cosmos.msg.v1.signer) = "owner";
-  string owner              = 1;
-  string denom              = 2;
-  string description        = 3;
-  string ticker             = 4;
-  int32  precision          = 5;
-  string url                = 6;
-  int32  maxSupply          = 7;
-  int32  supply             = 8;
-  bool   canChangeMaxSupply = 9;
+  string owner = 1;
+  string denom = 2;
+  string description = 3;
+  string url = 4;
+  int32 maxSupply = 5;
+  bool canChangeMaxSupply = 6;
 }
 
 message MsgUpdateDenomResponse {}
 
-message MsgDeleteDenom {
-  option (cosmos.msg.v1.signer) = "owner";
-  string owner = 1;
-  string denom = 2;
-}
+// message MsgDeleteDenom {
+//   option (cosmos.msg.v1.signer) = "owner";
+//   string owner = 1;
+//   string denom = 2;
+// }
 
-message MsgDeleteDenomResponse {}
+// message MsgDeleteDenomResponse {}
 
